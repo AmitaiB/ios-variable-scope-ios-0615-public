@@ -12,6 +12,10 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+//Are these needed? I only put them in to get rid of the error messages.
++ (NSScanner *)scannerWithString:(NSString *)aString;
+- (BOOL)scanCharactersFromSet:(NSCharacterSet *)setOfNotUpperCase;
+
 -(NSMutableArray *)arrayByAddingString:(NSString *)string toArray:(NSMutableArray *)array;
 
 -(NSUInteger)countOfStringsInAllCapsInArray:(NSArray *)array;
