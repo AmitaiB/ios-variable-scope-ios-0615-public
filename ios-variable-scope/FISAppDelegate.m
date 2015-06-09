@@ -43,4 +43,9 @@
     return totalNumOfCaps;
 }
 
+-(void)removeAllElementsFromArray:(NSMutableArray *)array
+{
+    [array removeAllObjects];
+}
+
 @end
