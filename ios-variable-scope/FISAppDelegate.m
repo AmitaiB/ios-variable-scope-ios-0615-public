@@ -21,4 +21,11 @@
     return YES;
 }
 
+-(NSMutableArray *)arrayByAddingString:(NSString *)string toArray:(NSMutableArray *)array {
+    //Need a DEEP copy...
+    NSMutableArray *outputArray = [array mutableCopy];
+    [outputArray addObject:string];
+    return outputArray;
+}
+
 @end
