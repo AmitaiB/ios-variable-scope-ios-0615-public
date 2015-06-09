@@ -29,18 +29,34 @@
 }
 
 -(NSUInteger)countOfStringsInAllCapsInArray:(NSArray *)array {
-    __block NSUInteger totalNumOfCaps = 0;
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSArray *arrayOfCharacters = [NSArray arrayWithArray:[array[idx] componentsSeparatedByString:@""]];
-        for (NSString *unitString in arrayOfCharacters) {
-            NSCharacterSet *allCaps = [NSCharacterSet capitalizedLetterCharacterSet];
-            unichar charToTest = [unitString characterAtIndex:0];
-            if ([allCaps characterIsMember:charToTest]) {
-                totalNumOfCaps += 1;
-            }
+    NSUInteger totalNumOfAllCapsElements = 0;
+    NSCharacterSet *invalidCharacters = [NSCharacterSet lowercaseLetterCharacterSet];
+    
+    for (NSString *unitString in array) {
+        if ([unitString rangeOfCharacterFromSet:invalidCharacters].location == NSNotFound) {
+            totalNumOfAllCapsElements++;
         }
-    }];
-    return totalNumOfCaps;
+    }
+    
+    return totalNumOfAllCapsElements;
+    
+    
+    
+    
+    
+    
+    //    __block NSUInteger totalNumOfCaps = 0;
+//    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NSArray *arrayOfCharacters = [NSArray arrayWithArray:[array[idx] componentsSeparatedByString:@""]];
+//        for (NSString *unitString in arrayOfCharacters) {
+//            NSCharacterSet *allCaps = [NSCharacterSet capitalizedLetterCharacterSet];
+//            unichar charToTest = [unitString characterAtIndex:0];
+//            if ([allCaps characterIsMember:charToTest]) {
+//                totalNumOfCaps += 1;
+//            }
+//        }
+//    }];
+//    return totalNumOfCaps;
 }
 
 -(void)removeAllElementsFromArray:(NSMutableArray *)array
