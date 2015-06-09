@@ -21,42 +21,46 @@
     return YES;
 }
 
-//1) return the array + string w/o modifying the original.
 -(NSMutableArray *)arrayByAddingString:(NSString *)string toArray:(NSMutableArray *)array {
-    NSMutableArray *newArray = [NSMutableArray arrayWithArray: array];
-    [newArray addObject:string];
-    return newArray;
+    //Need a DEEP copy...
+    NSMutableArray *outputArray = [array mutableCopy];
+    [outputArray addObject:string];
+    return outputArray;
 }
 
-//2) return the # of ALL-CAPS elements in an array.
 -(NSUInteger)countOfStringsInAllCapsInArray:(NSArray *)array {
-    NSUInteger totalElementsAllCaps = 0;
-    NSCharacterSet *setOfNotUpperCase = [[NSCharacterSet characterSetWithRange:NSMakeRange(65,90)] invertedSet];
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *aString = [array objectAtIndex:idx];
-        NSScanner *stringScanner = [[NSScanner alloc] initWithString:aString];
-//DIDN'T WORK; in hindsight, I should have just committed, and branched it off... if (!([array[idx] rangeOfCharacterFromSet:setOfNotUpperCase])) {
-        
-        //if the string contains any not-uppercase, returns YES. --de Morgan's Law-->
-        //if returns NO, then the string does not contain any not-uppercase (it's all caps).
-        if ([stringScanner scanCharactersFromSet:setOfNotUpperCase] == NO) {
-            totalElementsAllCaps++;
-        }
-    }];
+    NSUInteger totalNumOfAllCapsElements = 0;
+    NSCharacterSet *invalidCharacters = [NSCharacterSet lowercaseLetterCharacterSet];
     
-    /* DIDN'T WORK
-     for (NSString *word in array) {
-        if (![[*array[word]] rangeOfCharacterFromSet:lowerCaseLetterCharacterSet]) {
-            totalElementsAllCaps++;
+    for (NSString *unitString in array) {
+        if ([unitString rangeOfCharacterFromSet:invalidCharacters].location == NSNotFound) {
+            totalNumOfAllCapsElements++;
         }
     }
-     */
-    return totalElementsAllCaps;
+    
+    return totalNumOfAllCapsElements;
+    
+    
+    
+    
+    
+    
+    //    __block NSUInteger totalNumOfCaps = 0;
+//    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NSArray *arrayOfCharacters = [NSArray arrayWithArray:[array[idx] componentsSeparatedByString:@""]];
+//        for (NSString *unitString in arrayOfCharacters) {
+//            NSCharacterSet *allCaps = [NSCharacterSet capitalizedLetterCharacterSet];
+//            unichar charToTest = [unitString characterAtIndex:0];
+//            if ([allCaps characterIsMember:charToTest]) {
+//                totalNumOfCaps += 1;
+//            }
+//        }
+//    }];
+//    return totalNumOfCaps;
 }
 
-
-//3) rewrite removeAll... so that it works as intended.
--(void)removeAllElementsFromArray:(NSMutableArray *)array {
+-(void)removeAllElementsFromArray:(NSMutableArray *)array
+{
     [array removeAllObjects];
 }
 

@@ -17,9 +17,8 @@
 - (BOOL)scanCharactersFromSet:(NSCharacterSet *)setOfNotUpperCase;
 
 -(NSMutableArray *)arrayByAddingString:(NSString *)string toArray:(NSMutableArray *)array;
-
 -(NSUInteger)countOfStringsInAllCapsInArray:(NSArray *)array;
-
+-(void)removeAllElementsFromArray:(NSMutableArray *)array;
 -(void)removeAllElementsFromArray:(NSMutableArray *)array;
 
 @end
